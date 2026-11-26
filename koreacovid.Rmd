@@ -1,7 +1,7 @@
 ---
 title: "Initial Korean covid 19"
-author: "your name here"
-date: "todays date"
+author: "Cristal Hernandez"
+date: "Fall 2026"
 output:
   html_document: default
   pdf_document: default
@@ -26,15 +26,47 @@ Variables of interest: sex, result
 
 Research Question: - Is dying independent of sex?
 
-# Introduction
+# Introduction  
+
+We will determine if sex, either being a Man or Women is a factor in living or dying of Covid19?  Using the KData,from the Patient_Info dataset that was retrieved from a downloadable dataset on Kaggle. which contains Covid19 patient information from South Korea between January 1 and May 1, 2020. The purpose of this analysis is to examine whether a relationship exists between a patient's sex and their outcome from COVID-19.
+
+$H_0$ Dying and sex are independent. There is no relationship between a patient's sex and whether they died from COVID-19 in South Korea in 2019.
+
+$H_A$ Dying and sex are not independent. There is a relationship between a patient's sex and whether they died from COVID-19 in South Korea in 2019.  
+
+# Methods  
+
+Sex, if Women or Man is a Categorical variable. 
+
+Result, whether living or deceased is categorical.
 
 # Data Results
 
-## Graphical results    
+## Graphical results  
 
-## Numerical results
+```{r}
+barchartGC(~result + sex ,data=kData)
+barchartGC(~result + sex,data=kData, type="percent")
 
-## Inferential results 
+```  
+The graph suggests that males are likely to die
+
+## Numerical results  
+
+```{r}
+table1 <- xtabs(~result + Sex, data=kData)
+rowPerc(table1)
+colPerc(table1)
+```
+The numerical results shows that 64% of males died compared to 36% of females, indicating that men are almost twice as likely to die than women.  
+
+## Inferential results  
+
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+```
 
 # Conclusions
 
